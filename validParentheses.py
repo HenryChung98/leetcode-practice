@@ -1,22 +1,29 @@
+dict = {
+    "]": "[",
+    "}": "{",
+    ")": "("
+}
+
+
 class Solution:
     def isValid(self, s: str) -> bool:
-        is_valid = True
+        stack = []
+        for char in s:
+        # If the character is a closing bracket
+            if char in dict:
+                # Pop the top element from the stack (if the stack is not empty), otherwise assign a dummy value
+                top_element = stack.pop() if stack else '#'
+                
+                # Check if the popped element matches the corresponding opening bracket
+                if dict[char] != top_element:
+                    return False
+            else:
+                # If it's an opening bracket, push it onto the stack
+                stack.append(char)
 
-        dict = {
-            "[": "]",
-            "{": "}",
-            "(": ")"
-        }
-        for i in range(len(s)):
-
-            try:
-                if s[len(s) - 1 - i] != dict[s[i]] and s[i + 1] != dict[s[i]]:
-                    is_valid = False
-            except:
-                print('not in dict')
-                pass
-        return is_valid
-
+    # In the end, the stack should be empty if the string is valid
+        return not stack
 
 sol = Solution()
-print(sol.isValid("[])"))
+print(sol.isValid("{{()}"))
+
