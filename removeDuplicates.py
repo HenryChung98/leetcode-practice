@@ -22,4 +22,5 @@ sol = Solution()
 
 nums = [1, 2, 1]
 k = sol.removeDuplicates(nums)
+print(nums)
 print("Modified array:", nums[:k])    
